@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.example.guysassignment.R;
 
@@ -60,7 +63,25 @@ public class TrigoWFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trigo_w, container, false);
+        // 1. inflate your layout
+        View view = inflater.inflate(R.layout.fragment_trigo_w, container, false);
+
+        // 2. find your WebView
+        WebView web = view.findViewById(R.id.webview);
+
+        // 3. enable JavaScript if your HTML app needs it
+        WebSettings settings = web.getSettings();
+        settings.setJavaScriptEnabled(true);
+
+        // 4. ensure links load in the WebView, not in the browser
+        web.setWebViewClient(new WebViewClient());
+
+        // 5. load your HTML app
+        //    – if it lives in app/src/main/assets/myapp/index.html:
+        //web.loadUrl("file:///android_asset/myapp/index.html");
+        //    – or load a remote URL:
+        web.loadUrl("https://מתמטיקה.com/ttrainer");
+
+        return view;
     }
 }

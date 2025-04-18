@@ -22,4 +22,10 @@
         android:name="com.example.guysassignment.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_trigow"
+        android:name="com.example.guysassignment.ui.TrigoWFragment"
+        android:label="Trigo"
+        tools:layout="@layout/fragment_trigo_w" />
 </navigation>
