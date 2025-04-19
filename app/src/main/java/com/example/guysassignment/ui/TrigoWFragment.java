@@ -1,3 +1,8 @@
+/// Prompting: Guy S, on 4o: https://chatgpt.com/share/680345f8-2730-800e-93dc-eaed2a4150c3
+// Puspose: host a local webView that was created in March/April 2025 that interacts with firebase
+/// , continued on 4o-mini-high: https://chatgpt.com/share/68034575-9bcc-800e-abcb-86be4ecae071
+/// personal link: https://chatgpt.com/c/6802507d-21c4-800e-9102-12ad1933807a
+
 package com.example.guysassignment.ui;
 
 import android.os.Bundle;
