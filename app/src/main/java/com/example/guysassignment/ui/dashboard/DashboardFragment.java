@@ -49,7 +49,8 @@ public class DashboardFragment extends Fragment {
             int score = sharedVM.getBestScore().getValue();
 
             if (!name.isEmpty() || !family.isEmpty() || score != 0) {
-                String combined = "Name: " + name + "\n"
+                String combined = "Dashboard Fragment:\n" +
+                        "Name: " + name + "\n"
                         + "Family: " + family + "\n"
                         + "Best score: " + score;
                 tv.setText(combined);

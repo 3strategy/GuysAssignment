@@ -1,5 +1,6 @@
 package com.example.guysassignment.ui.home;
 
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,25 +9,60 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.guysassignment.SharedViewModel;
 import com.example.guysassignment.databinding.FragmentHomeBinding;
+import com.example.guysassignment.ui.home.HomeViewModel;
 
 public class HomeFragment extends Fragment {
-
     private FragmentHomeBinding binding;
+    private SharedViewModel sharedVM;
+    private HomeViewModel dashVM;
 
+    @Override
+    public void onCreate(Bundle saved) {
+        super.onCreate(saved);
+        sharedVM = new ViewModelProvider(requireActivity())
+                .get(SharedViewModel.class);
+        dashVM = new ViewModelProvider(this)
+                .get(HomeViewModel.class);
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-
+                             ViewGroup container, Bundle saved) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        TextView tv = binding.textHome;
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        // Observe the old default text, too:
+        dashVM.getText().observe(getViewLifecycleOwner(), defaultText -> {
+            // if no name has been set yet, show the default
+            if (sharedVM.getName().getValue().isEmpty()) {
+                tv.setText(defaultText);
+            }
+        });
+
+        // Observe the three shared values and rebuild the Home text
+        Observer<Object> rebuild = o -> {
+            String name = sharedVM.getName().getValue();
+            String family = sharedVM.getFamilyName().getValue();
+            int score = sharedVM.getBestScore().getValue();
+
+            if (!name.isEmpty() || !family.isEmpty() || score != 0) {
+                String combined = "Home Fragment:\n" +
+                        "Name: " + name + "\n"
+                        + "Family: " + family + "\n"
+                        + "Best score: " + score;
+                tv.setText(combined);
+            }
+        };
+        sharedVM.getName().observe(getViewLifecycleOwner(), rebuild);
+        sharedVM.getFamilyName().observe(getViewLifecycleOwner(), rebuild);
+        sharedVM.getBestScore().observe(getViewLifecycleOwner(), rebuild);
+
+        return binding.getRoot();
     }
 
     @Override
