@@ -72,15 +72,15 @@ public class TrigoWFragment extends Fragment {
         // 3. enable JavaScript if your HTML app needs it
         WebSettings settings = web.getSettings();
         settings.setJavaScriptEnabled(true);
-
+        settings.setAllowFileAccess(true);
         // 4. ensure links load in the WebView, not in the browser
         web.setWebViewClient(new WebViewClient());
 
         // 5. load your HTML app
         //    – if it lives in app/src/main/assets/myapp/index.html:
-        //web.loadUrl("file:///android_asset/myapp/index.html");
+        web.loadUrl("file:///android_asset/myapp/ttrainer.html");
         //    – or load a remote URL:
-        web.loadUrl("https://מתמטיקה.com/ttrainer");
+        //web.loadUrl("https://מתמטיקה.com/ttrainer");
 
         return view;
     }
