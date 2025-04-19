@@ -394,6 +394,13 @@
         tableHTML += "</table>";
         console.log(tableHTML); //For debugging.
         document.getElementById("leaderboard").innerHTML = tableHTML;
+
+        // smooth‑scroll to bottom:
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth'
+        });
+
       } catch (error) {
         console.error("Error fetching leaderboard:", error);
         document.getElementById("leaderboard").innerHTML = "<p>Error fetching leaderboard.</p>";
