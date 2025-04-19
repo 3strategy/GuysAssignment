@@ -31,9 +31,9 @@ public class SharedViewModel extends AndroidViewModel {
         prefs = app.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
 
         // initialize from prefs (if missing, default to empty / 0)
-        name.setValue(prefs.getString(KEY_NAME, ""));
-        familyName.setValue(prefs.getString(KEY_FAMILY, ""));
-        bestScore.setValue(prefs.getInt(KEY_SCORE, 0));
+        name.setValue(prefs.getString(KEY_NAME, "— no name set —"));
+        familyName.setValue(prefs.getString(KEY_FAMILY, "— no family name set —"));
+        bestScore.setValue(prefs.getInt(KEY_SCORE, -1));
 
         // listen for external edits (if any)
         prefs.registerOnSharedPreferenceChangeListener((sp, key) -> {
